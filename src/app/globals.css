@@ -1,49 +1,84 @@
+/* ===========================
+   GARDEN ROMANCE – GLOBAL CSS
+   Color: Sage Green + Dusty Rose + Ivory
+   ===========================*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sage: #7C9A7E;
+  --sage-light: #A8C5AA;
+  --sage-dark: #4E6B50;
+  --rose: #C4846A;
+  --rose-light: #E8B9A8;
+  --rose-pale: #F5E8E4;
+  --ivory: #FDFAF5;
+  --ivory-dark: #F0EBE0;
+  --charcoal: #2D2D2D;
+  --warm-gray: #6B6560;
+  --light-gray: #A09890;
+  --white: #FFFFFF;
+
+  --font-heading: var(--font-cormorant), 'Cormorant Garamond', serif;
+  --font-body: var(--font-dm), 'DM Sans', sans-serif;
+
+  --sh: 0 4px 24px rgba(78,107,80,0.08);
+  --sh-md: 0 12px 48px rgba(78,107,80,0.12);
+  --sh-lg: 0 24px 80px rgba(78,107,80,0.18);
+  --r: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  max-width: 100vw;
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
 
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ===== KEYFRAMES ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes leafFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-12px) rotate(5deg); }
+}
+@keyframes leafFall {
+  0%   { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0.9; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(40px); opacity: 0; }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+@keyframes envelopeOpen {
+  0%   { transform: rotateX(0deg); }
+  100% { transform: rotateX(-180deg); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
