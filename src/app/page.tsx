@@ -380,10 +380,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div className={st.dressAvoid}>
-              <span>🚫</span>
-              <span>Mohon hindari warna <strong>hitam, merah terang, dan putih penuh</strong></span>
-            </div>
+
           </section>
 
           {/* ========== GALLERY ========== */}
@@ -488,7 +485,7 @@ export default function Home() {
                   onChange={(e) => setForm({ ...form, hadir: e.target.value })}
                 >
                   <option value="hadir">✅ Hadir</option>
-                  <option value="tidak_hadir">❌ Tidak Bisa Hadir</option>
+                  <option value="tidak_hadir">Tidak Bisa Hadir</option>
                 </select>
                 <textarea
                   className={st.rsvpTextarea}
@@ -513,7 +510,7 @@ export default function Home() {
                       <div className={st.wishAv}>{w.name.charAt(0)}</div>
                       <span className={st.wishAuthor}>{w.name}</span>
                       <span className={st.wishHadir}>
-                        {w.hadir === "hadir" ? "✅ Hadir" : "❌ Tidak Hadir"}
+                        {w.hadir === "hadir" ? "✅ Hadir" : "Tidak Hadir"}
                       </span>
                     </div>
                     <p className={st.wishMsg}>{w.wish}</p>

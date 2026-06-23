@@ -811,20 +811,28 @@
 }
 .galleryInner { max-width: 1000px; margin: 0 auto; }
 .masonryGrid {
-  columns: 2;
-  column-gap: 1rem;
-  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
-@media (min-width: 640px) { .masonryGrid { columns: 3; } }
 .masonryItem {
-  break-inside: avoid;
-  margin-bottom: 1rem;
+  width: calc(50% - 0.75rem);
+  max-width: 320px;
   position: relative;
   overflow: hidden;
   border-radius: 16px;
   cursor: pointer;
   box-shadow: var(--sh);
 }
+@media (min-width: 640px) { 
+  .masonryItem { 
+    width: 280px; 
+    flex-grow: 0;
+  } 
+}
+
 .masonryItem img { display: block; width: 100%; height: auto; transition: transform 0.5s ease; }
 .masonryItem:hover img { transform: scale(1.06); }
 .masonryOverlay {
