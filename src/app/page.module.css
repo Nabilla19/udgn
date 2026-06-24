@@ -35,59 +35,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #F9FDF9 0%, #E6F0E8 100%);
+  /* Soft pastel background matching the uploaded image */
+  background: linear-gradient(135deg, #EAF3F2 0%, #D8E7E4 100%);
   overflow: hidden;
   padding: 2rem;
 }
 
-/* Pure CSS background decorations */
-.coverOrb1 {
+/* Responsive Corners via CSS */
+.coverFloralTop {
   position: absolute;
-  top: -20vh;
-  left: -20vw;
-  width: 70vw;
-  height: 70vw;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
-  filter: blur(60px);
+  top: 0;
+  left: 0;
+  width: clamp(250px, 45vw, 500px);
   z-index: 1;
-  animation: orbFloat1 15s ease-in-out infinite alternate;
-}
-
-.coverOrb2 {
-  position: absolute;
-  bottom: -20vh;
-  right: -20vw;
-  width: 80vw;
-  height: 80vw;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(133,176,136,0.4) 0%, rgba(133,176,136,0) 70%);
-  filter: blur(60px);
-  z-index: 1;
-  animation: orbFloat2 20s ease-in-out infinite alternate;
-}
-
-.coverLineDecoration {
-  position: absolute;
-  inset: 2rem;
-  border: 1px solid rgba(133,176,136, 0.2);
-  z-index: 2;
   pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
 }
-.coverLineDecoration::before,
-.coverLineDecoration::after {
-  content: '';
+.coverFloralTop img { width: 100%; height: auto; object-fit: contain; }
+
+.coverFloralBottom {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border: 1px solid rgba(133,176,136, 0.4);
+  bottom: 0;
+  right: 0;
+  width: clamp(250px, 45vw, 500px);
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  transform: rotate(180deg);
 }
-.coverLineDecoration::before {
-  top: -5px; left: -5px;
-}
-.coverLineDecoration::after {
-  bottom: -5px; right: -5px;
-}
+.coverFloralBottom img { width: 100%; height: auto; object-fit: contain; }
 
 .coverContent {
   position: relative;

@@ -136,10 +136,13 @@ export default function Home() {
     <>
       {/* ========== ELEGANT COVER ========== */}
       <section className={st.coverSection}>
-        {/* Pure CSS background decorations */}
-        <div className={st.coverOrb1} aria-hidden="true" />
-        <div className={st.coverOrb2} aria-hidden="true" />
-        <div className={st.coverLineDecoration} aria-hidden="true" />
+        {/* Responsive Floral Corners via Code */}
+        <div className={st.coverFloralTop} aria-hidden="true">
+          <Image src="/images/floral-new.png" alt="" width={500} height={500} priority />
+        </div>
+        <div className={st.coverFloralBottom} aria-hidden="true">
+          <Image src="/images/floral-new.png" alt="" width={500} height={500} priority />
+        </div>
 
         <div className={st.coverContent}>
           <p className={st.coverTo}>Kepada Yth.</p>
