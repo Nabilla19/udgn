@@ -107,8 +107,10 @@ export default function Home() {
   const isV = (id: string) => visible.has(id);
 
   const handleOpen = () => {
-    setIsOpen(true);
-    setTimeout(() => setShowContent(true), 900);
+    setShowContent(true);
+    setTimeout(() => {
+      document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   const handleCopy = (text: string) => {
@@ -132,119 +134,36 @@ export default function Home() {
 
   return (
     <>
-      {/* ========== ENVELOPE COVER ========== */}
-      <div className={`${st.envelopeWrap} ${isOpen ? st.opening : st.closed}`}>
-        {/* Bokeh light effects */}
-        <div className={st.bokehContainer} aria-hidden="true">
-          {[...Array(20)].map((_, i) => (
-            <span key={i} className={st.bokeh} style={{
-              "--bx": `${5 + Math.random() * 90}%`,
-              "--by": `${5 + Math.random() * 90}%`,
-              "--bs": `${8 + Math.random() * 40}px`,
-              "--bd": `${3 + Math.random() * 5}s`,
-              "--bdelay": `${Math.random() * 4}s`,
-              "--bop": `${0.03 + Math.random() * 0.12}`,
-            } as React.CSSProperties} />
-          ))}
+      {/* ========== ELEGANT COVER ========== */}
+      <section className={st.coverSection}>
+        {/* Subtle floral decorations */}
+        <div className={st.coverFloralTop} aria-hidden="true">
+          <Image src="/images/floral-top.png" alt="" width={400} height={400} priority />
+        </div>
+        <div className={st.coverFloralBottom} aria-hidden="true">
+          <Image src="/images/floral-bottom.png" alt="" width={400} height={400} priority />
         </div>
 
-        {/* Floating sparkles */}
-        <div className={st.sparkleContainer} aria-hidden="true">
-          {[...Array(15)].map((_, i) => (
-            <span key={i} className={st.sparkle} style={{
-              "--sx": `${Math.random() * 100}%`,
-              "--sy": `${Math.random() * 100}%`,
-              "--sd": `${2 + Math.random() * 3}s`,
-              "--sdelay": `${Math.random() * 5}s`,
-            } as React.CSSProperties}>✦</span>
-          ))}
-        </div>
-
-        {/* Soft light rays from top */}
-        <div className={st.lightRays} aria-hidden="true" />
-
-        {/* Floral decorations */}
-        <div className={st.floralTop} aria-hidden="true">
-          <Image src="/images/floral-top.png" alt="" width={500} height={500} priority />
-        </div>
-        <div className={st.floralBottom} aria-hidden="true">
-          <Image src="/images/floral-bottom.png" alt="" width={500} height={500} priority />
-        </div>
-
-        {/* === ENVELOPE STRUCTURE === */}
-        <div className={st.envelopeScene}>
-          {/* Letter/Card emerging from envelope */}
-          <div className={st.letterCard}>
-            <div className={st.letterInner}>
-              {/* Ornamental border */}
-              <div className={st.letterBorderOrnament} />
-              
-              <p className={st.envelopeTo}>Kepada Yth.</p>
-              <p className={st.envelopeGuest}>Bapak / Ibu / Saudara/i<br />Tamu Undangan</p>
-              
-              <div className={st.letterOrnamentLine}>
-                <span />
-                <span className={st.letterDiamond}>◆</span>
-                <span />
-              </div>
-
-              <p className={st.envelopeSubtitle}>The Wedding Of</p>
-              <h1 className={st.envelopeNames}>Andi</h1>
-              <p className={st.envelopeAmpersand}>&</p>
-              <h1 className={st.envelopeNames}>Sari</h1>
-
-              <div className={st.envelopeDateWrap}>
-                <span className={st.envelopeDateLine} />
-                <p className={st.envelopeDate}>20 · 12 · 2026</p>
-                <span className={st.envelopeDateLine} />
-              </div>
-
-              {/* Mini countdown */}
-              <div className={st.envelopeCountdown}>
-                <div className={st.envCdItem}>
-                  <span className={st.envCdNum}>{String(countdown.d).padStart(2, "0")}</span>
-                  <span className={st.envCdLabel}>Hari</span>
-                </div>
-                <span className={st.envCdSep}>|</span>
-                <div className={st.envCdItem}>
-                  <span className={st.envCdNum}>{String(countdown.h).padStart(2, "0")}</span>
-                  <span className={st.envCdLabel}>Jam</span>
-                </div>
-                <span className={st.envCdSep}>|</span>
-                <div className={st.envCdItem}>
-                  <span className={st.envCdNum}>{String(countdown.m).padStart(2, "0")}</span>
-                  <span className={st.envCdLabel}>Menit</span>
-                </div>
-                <span className={st.envCdSep}>|</span>
-                <div className={st.envCdItem}>
-                  <span className={st.envCdNum}>{String(countdown.s).padStart(2, "0")}</span>
-                  <span className={st.envCdLabel}>Detik</span>
-                </div>
-              </div>
-            </div>
+        <div className={st.coverContent}>
+          <p className={st.coverTo}>Kepada Yth.</p>
+          <p className={st.coverGuest}>Bapak / Ibu / Saudara/i<br />Tamu Undangan</p>
+          
+          <div className={st.coverDivider}>
+            <span />
+            <span className={st.coverDiamond}>◆</span>
+            <span />
           </div>
 
-          {/* Actual Envelope body */}
-          <div className={st.envelopeBody}>
-            {/* Envelope flap (triangle) */}
-            <div className={st.envelopeFlap} />
-            {/* Wax seal */}
-            <div className={st.waxSeal}>
-              <span className={st.waxSealInner}>A&S</span>
-            </div>
-            {/* Envelope front face */}
-            <div className={st.envelopeFront}>
-              <div className={st.envelopeLining} />
-            </div>
-          </div>
+          <p className={st.coverSubtitle}>The Wedding Of</p>
+          <h1 className={st.coverNames}>Andi <span>&</span> Sari</h1>
 
-          {/* Open button below envelope */}
-          <button id="btn-buka-undangan" className={st.envelopeBtn} onClick={handleOpen}>
-            <span className={st.envBtnAni}>💌</span>
+          <p className={st.coverDate}>20 Desember 2026</p>
+
+          <button id="btn-buka-undangan" className={st.coverBtn} onClick={handleOpen}>
             Buka Undangan
           </button>
         </div>
-      </div>
+      </section>
 
       {showContent && (
         <main className={st.main}>
