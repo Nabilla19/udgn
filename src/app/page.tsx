@@ -134,39 +134,34 @@ export default function Home() {
 
   return (
     <>
-      {/* ========== PHOTO FADE COVER ========== */}
+      {/* ========== ELEGANT COVER ========== */}
       <section className={st.coverSection}>
-        {/* Top half: Photo with gradient fade */}
-        <div className={st.coverHeroWrap}>
-          <Image 
-            src="/images/gallery1.png" 
-            alt="Couple" 
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            priority 
-          />
-          <div className={st.coverGradientFade} />
+        {/* Responsive Floral Corners via Code */}
+        <div className={st.coverFloralTop} aria-hidden="true">
+          <Image src="/images/floral-new.png" alt="" width={500} height={500} priority />
+        </div>
+        <div className={st.coverFloralBottom} aria-hidden="true">
+          <Image src="/images/floral-new.png" alt="" width={500} height={500} priority />
         </div>
 
-        {/* Bottom half: Content */}
         <div className={st.coverContent}>
-          <div className={st.coverTextWrap}>
-            <div className={st.coverPretitle}>
-              <span className={st.coverLine}></span> 
-              UNDANGAN PERNIKAHAN 
-              <span className={st.coverLine}></span>
-            </div>
-            
-            <h1 className={st.coverNames}>Andi</h1>
-            <p className={st.coverAmpersand}>&</p>
-            <h1 className={st.coverNames}>Sari</h1>
+          <p className={st.coverTo}>Kepada Yth.</p>
+          <p className={st.coverGuest}>Bapak / Ibu / Saudara/i<br />Tamu Undangan</p>
+          
+          <div className={st.coverDivider}>
+            <span />
+            <span className={st.coverDiamond}>◆</span>
+            <span />
           </div>
 
-          <div className={st.coverActionWrap}>
-            <button id="btn-buka-undangan" className={st.coverBtn} onClick={handleOpen}>
-              Buka Undangan
-            </button>
-          </div>
+          <p className={st.coverSubtitle}>The Wedding Of</p>
+          <h1 className={st.coverNames}>Andi <span>&</span> Sari</h1>
+
+          <p className={st.coverDate}>20 Desember 2026</p>
+
+          <button id="btn-buka-undangan" className={st.coverBtn} onClick={handleOpen}>
+            Buka Undangan
+          </button>
         </div>
       </section>
 

@@ -28,86 +28,135 @@
   opacity: 0.6;
 }
 
-/* ===== PHOTO FADE COVER ===== */
+/* ===== ELEGANT COVER ===== */
 .coverSection {
   position: relative;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  background-color: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+  /* Soft pastel background matching the uploaded image */
+  background: linear-gradient(135deg, #EAF3F2 0%, #D8E7E4 100%);
   overflow: hidden;
+  padding: 2rem;
 }
 
-.coverHeroWrap {
-  position: relative;
-  width: 100%;
-  height: 60vh; /* Takes top 60% of the screen */
-  flex-shrink: 0;
-}
-
-.coverGradientFade {
+/* Responsive Corners via CSS */
+.coverFloralTop {
   position: absolute;
-  bottom: -1px; /* Overlap slightly to prevent sub-pixel gaps */
+  top: 0;
   left: 0;
-  right: 0;
-  height: 25vh; /* The height of the fade */
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+  width: clamp(250px, 45vw, 500px);
+  z-index: 1;
   pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
 }
+.coverFloralTop img { width: 100%; height: auto; object-fit: contain; }
+
+.coverFloralBottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: clamp(250px, 45vw, 500px);
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  transform: rotate(180deg);
+}
+.coverFloralBottom img { width: 100%; height: auto; object-fit: contain; }
 
 .coverContent {
   position: relative;
   z-index: 10;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0 2rem 4rem;
-  background-color: #FFFFFF;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 4rem 3rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  width: min(90%, 500px);
+  animation: cardAppear 1s 0.2s ease both;
 }
 
-.coverTextWrap {
-  text-align: left;
-  margin-top: -3rem; /* Pull up into the white area */
-  position: relative;
-  z-index: 2;
+.coverContent::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(133,176,136, 0.3);
+  border-radius: 12px;
+  pointer-events: none;
 }
 
-.coverPretitle {
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  color: #D29B7A; /* Salmon/copper color from screenshot */
+.coverTo {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.coverGuest {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  color: var(--charcoal);
   margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.coverDivider {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
 }
-.coverLine {
-  width: 20px;
+.coverDivider > span:first-child,
+.coverDivider > span:last-child {
+  width: 40px;
   height: 1px;
-  background-color: #D29B7A;
+  background: linear-gradient(90deg, transparent, var(--sage-light), transparent);
+  display: block;
+}
+.coverDiamond {
+  color: var(--sage-light);
+  font-size: 0.5rem;
+}
+
+.coverSubtitle {
+  font-size: 0.75rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.5rem;
 }
 
 .coverNames {
   font-family: var(--font-heading);
-  font-size: clamp(4rem, 15vw, 6.5rem);
-  color: #4A5D4E; /* Dark sage green */
+  font-size: clamp(3rem, 10vw, 4.5rem);
+  color: var(--sage-dark);
   line-height: 1;
-  margin: 0;
-  font-weight: 500;
-}
-
-.coverAmpersand {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 10vw, 4rem);
-  color: #D29B7A;
+  margin: 0 0 1.5rem 0;
+  font-weight: 400;
   font-style: italic;
-  margin: 0.2rem 0;
+}
+.coverNames span {
+  font-size: 0.6em;
+  color: var(--rose);
+  vertical-align: middle;
+  font-style: italic;
 }
 
-.coverActionWrap {
-  margin-top: 2rem;
-  text-align: left;
+.coverDate {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: var(--warm-gray);
+  margin-bottom: 2.5rem;
 }
 
 .coverBtn {
