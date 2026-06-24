@@ -33,230 +33,351 @@
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: linear-gradient(160deg, #C6DEC8 0%, #A8C5AA 30%, #8DB090 60%, #7A9F7D 100%);
+  background: linear-gradient(170deg, #D1E3D3 0%, #B5D0B7 25%, #9ABD9C 50%, #85B088 75%, #6F9E72 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 1s ease, visibility 1s ease;
+  transition: opacity 1.2s ease, visibility 1.2s ease;
   overflow: hidden;
 }
 .envelopeWrap.closed  { opacity: 1; visibility: visible; }
 .envelopeWrap.opening { opacity: 0; visibility: hidden; }
 
-/* Floral decorations */
-.floralTop {
-  position: absolute;
-  top: -40px;
-  left: -40px;
-  width: clamp(220px, 45vw, 420px);
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.92;
-  animation: floralFadeIn 1.5s 0.3s ease both;
-}
-.floralTop img {
-  width: 100%;
-  height: auto;
-}
-.floralBottom {
-  position: absolute;
-  bottom: -40px;
-  right: -40px;
-  width: clamp(220px, 45vw, 420px);
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.92;
-  transform: rotate(180deg);
-  animation: floralFadeIn 1.5s 0.6s ease both;
-}
-.floralBottom img {
-  width: 100%;
-  height: auto;
-}
-
-/* Gold floating particles */
-.goldParticles {
+/* === BOKEH LIGHTS === */
+.bokehContainer {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
 }
-.goldDot {
+.bokeh {
   position: absolute;
-  left: var(--gx);
-  top: var(--gy);
-  width: var(--gs, 4px);
-  height: var(--gs, 4px);
+  left: var(--bx);
+  top: var(--by);
+  width: var(--bs, 20px);
+  height: var(--bs, 20px);
   border-radius: 50%;
-  background: radial-gradient(circle, #D4AF37 0%, #C5982A 60%, transparent 100%);
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%, transparent 70%);
   opacity: 0;
-  animation: goldFloat var(--gd, 3s) ease-in-out infinite;
+  animation: bokehPulse var(--bd, 4s) ease-in-out infinite;
+  animation-delay: var(--bdelay, 0s);
 }
 
-.envelope {
+/* === SPARKLES === */
+.sparkleContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.sparkle {
+  position: absolute;
+  left: var(--sx);
+  top: var(--sy);
+  font-size: 0.6rem;
+  color: rgba(212,175,55,0.7);
+  opacity: 0;
+  animation: sparkleTwinkle var(--sd, 3s) ease-in-out infinite;
+  animation-delay: var(--sdelay, 0s);
+}
+
+/* === LIGHT RAYS === */
+.lightRays {
+  position: absolute;
+  top: -30%;
+  left: 30%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  animation: lightRayPulse 6s ease-in-out infinite;
+}
+
+/* === FLORALS === */
+.floralTop {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: clamp(180px, 38vw, 360px);
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  animation: floralFadeIn 1.5s 0.5s ease both;
+}
+.floralTop img { width: 100%; height: auto; }
+.floralBottom {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: clamp(180px, 38vw, 360px);
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transform: rotate(180deg);
+  animation: floralFadeIn 1.5s 0.8s ease both;
+}
+.floralBottom img { width: 100%; height: auto; }
+
+/* === ENVELOPE SCENE (center structure) === */
+.envelopeScene {
   position: relative;
-  width: min(480px, 90vw);
-  text-align: center;
+  width: min(420px, 88vw);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: cardAppear 1s 0.3s ease both;
+}
+
+/* === LETTER CARD (emerging from envelope) === */
+.letterCard {
+  position: relative;
   z-index: 3;
-  animation: cardAppear 1s 0.2s ease both;
+  width: 92%;
+  margin: 0 auto;
+  animation: letterSlideUp 1.2s 0.8s ease both;
 }
-
-.envelopeCard {
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,0.45);
-  border-radius: 28px;
-  padding: 3rem 2.5rem 2.5rem;
-  box-shadow:
-    0 24px 80px rgba(45,70,47,0.25),
-    0 0 0 1px rgba(255,255,255,0.1) inset,
-    0 2px 0 rgba(255,255,255,0.3) inset;
+.letterInner {
+  background: linear-gradient(180deg, #FFFEF9 0%, #FBF8F0 50%, #F7F2E8 100%);
+  border-radius: 16px 16px 4px 4px;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
   position: relative;
-  overflow: hidden;
+  box-shadow:
+    0 -4px 20px rgba(0,0,0,0.06),
+    0 2px 8px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
-/* Gold accent lines */
-.envelopeGoldLine {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #C5982A, #D4AF37, #C5982A, transparent);
-  margin: 0 auto 2rem;
-  opacity: 0.8;
+/* Ornamental gold border inside letter */
+.letterBorderOrnament {
+  position: absolute;
+  top: 10px; left: 10px; right: 10px; bottom: 10px;
+  border: 1.5px solid rgba(212,175,55,0.25);
+  border-radius: 10px;
+  pointer-events: none;
 }
-.envelopeGoldLineBottom {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #C5982A, #D4AF37, #C5982A, transparent);
-  margin: 1.5rem auto 0;
-  opacity: 0.8;
+.letterBorderOrnament::before {
+  content: '';
+  position: absolute;
+  top: -5px; left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 10px;
+  background: linear-gradient(180deg, #FFFEF9, #FBF8F0);
+}
+
+/* Gold ornament line with diamond */
+.letterOrnamentLine {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  justify-content: center;
+}
+.letterOrnamentLine > span:first-child,
+.letterOrnamentLine > span:last-child {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+  display: block;
+}
+.letterDiamond {
+  color: #C5982A;
+  font-size: 0.45rem;
+  opacity: 0.7;
 }
 
 .envelopeTo {
-  font-size: 0.65rem;
-  letter-spacing: 6px;
+  font-size: 0.6rem;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.8);
-  margin-bottom: 0.5rem;
+  color: #8B7D6B;
+  margin-bottom: 0.3rem;
   font-weight: 500;
 }
 .envelopeGuest {
   font-family: var(--font-heading);
-  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-  color: #fff;
-  margin-bottom: 1.5rem;
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  color: #4A3F35;
+  margin-bottom: 1.2rem;
   line-height: 1.5;
   font-style: italic;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.envelopeDivider {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-.envelopeDivider::before, .envelopeDivider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5));
-}
-.envelopeDivider::after { transform: scaleX(-1); }
-.envelopeDiamondIcon {
-  color: #D4AF37;
-  font-size: 0.5rem;
-  opacity: 0.8;
 }
 
 .envelopeSubtitle {
-  font-size: 0.7rem;
-  letter-spacing: 5px;
+  font-size: 0.6rem;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 0.5rem;
+  color: #A09080;
+  margin-bottom: 0.3rem;
   font-weight: 400;
 }
 
 .envelopeNames {
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 10vw, 4.5rem);
-  color: #fff;
+  font-size: clamp(2.5rem, 9vw, 3.8rem);
+  color: var(--sage-dark);
   line-height: 1;
   margin: 0;
-  text-shadow: 0 2px 8px rgba(45,70,47,0.2);
   font-weight: 400;
   font-style: italic;
 }
 
 .envelopeAmpersand {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  color: #D4AF37;
-  margin: 0.2rem 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: #C5982A;
+  margin: 0.15rem 0;
   font-style: italic;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .envelopeDateWrap {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
   justify-content: center;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
 }
 .envelopeDateLine {
-  width: 40px;
+  width: 30px;
   height: 1px;
-  background: rgba(212,175,55,0.4);
+  background: rgba(197,152,42,0.3);
 }
 .envelopeDate {
-  font-size: 0.8rem;
-  letter-spacing: 4px;
-  color: rgba(255,255,255,0.85);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  color: #8B7D6B;
   font-weight: 500;
 }
 
-/* Mini countdown on cover */
+/* Mini countdown on letter */
 .envelopeCountdown {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0;
-  margin-bottom: 2rem;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 16px;
-  padding: 0.8rem 1.2rem;
+  background: rgba(78,107,80,0.06);
+  border: 1px solid rgba(78,107,80,0.1);
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
 }
 .envCdItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 52px;
+  min-width: 44px;
 }
 .envCdNum {
   font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 4vw, 1.8rem);
-  color: #fff;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  color: var(--sage-dark);
   font-weight: 600;
   line-height: 1;
 }
 .envCdLabel {
-  font-size: 0.55rem;
-  letter-spacing: 2px;
+  font-size: 0.5rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: #8B7D6B;
   margin-top: 2px;
 }
 .envCdSep {
-  color: rgba(255,255,255,0.2);
-  font-size: 1.2rem;
-  margin: 0 0.3rem;
+  color: rgba(78,107,80,0.15);
+  font-size: 1rem;
+  margin: 0 0.2rem;
   line-height: 1;
 }
 
+/* === ENVELOPE BODY === */
+.envelopeBody {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 130px;
+  margin-top: -20px;
+}
+
+/* Envelope front (rectangle) */
+.envelopeFront {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: linear-gradient(180deg, #E8DDD0 0%, #D9CCB8 50%, #CCBFA8 100%);
+  border-radius: 0 0 12px 12px;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.12),
+    inset 0 2px 0 rgba(255,255,255,0.3);
+  overflow: hidden;
+}
+.envelopeLining {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 18px,
+      rgba(78,107,80,0.04) 18px,
+      rgba(78,107,80,0.04) 20px
+    );
+}
+
+/* Envelope flap (triangle pointing up) */
+.envelopeFlap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, #D9CCB8 0%, #CCBFA8 100%);
+  clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+  z-index: 1;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+}
+.envelopeFlap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+}
+
+/* Wax seal */
+.waxSeal {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #D4483B 0%, #B82E24 50%, #8B1A14 100%);
+  box-shadow:
+    0 3px 12px rgba(139,26,20,0.4),
+    inset 0 1px 2px rgba(255,255,255,0.3),
+    inset 0 -1px 2px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sealAppear 0.5s 1.5s ease both;
+}
+.waxSealInner {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+/* Open button */
 .envelopeBtn {
+  margin-top: 1.8rem;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -274,6 +395,7 @@
   position: relative;
   letter-spacing: 0.5px;
   text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  animation: fadeUp 1s 2s both;
 }
 .envelopeBtn::after {
   content: '';
