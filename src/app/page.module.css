@@ -33,7 +33,7 @@
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: linear-gradient(160deg, #E8F0E9 0%, #D4E6D6 40%, #C2D8C4 100%);
+  background: linear-gradient(160deg, #C6DEC8 0%, #A8C5AA 30%, #8DB090 60%, #7A9F7D 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,109 +43,237 @@
 .envelopeWrap.closed  { opacity: 1; visibility: visible; }
 .envelopeWrap.opening { opacity: 0; visibility: hidden; }
 
-.envelopeBg {
+/* Floral decorations */
+.floralTop {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: clamp(220px, 45vw, 420px);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.92;
+  animation: floralFadeIn 1.5s 0.3s ease both;
+}
+.floralTop img {
+  width: 100%;
+  height: auto;
+}
+.floralBottom {
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: clamp(220px, 45vw, 420px);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.92;
+  transform: rotate(180deg);
+  animation: floralFadeIn 1.5s 0.6s ease both;
+}
+.floralBottom img {
+  width: 100%;
+  height: auto;
+}
+
+/* Gold floating particles */
+.goldParticles {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(200px, 40vw, 500px);
-  opacity: 0.06;
-  color: var(--sage-dark);
   pointer-events: none;
-  line-height: 1;
+  z-index: 1;
+}
+.goldDot {
+  position: absolute;
+  left: var(--gx);
+  top: var(--gy);
+  width: var(--gs, 4px);
+  height: var(--gs, 4px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #D4AF37 0%, #C5982A 60%, transparent 100%);
+  opacity: 0;
+  animation: goldFloat var(--gd, 3s) ease-in-out infinite;
 }
 
 .envelope {
   position: relative;
-  width: min(500px, 92vw);
+  width: min(480px, 90vw);
   text-align: center;
-  z-index: 1;
+  z-index: 3;
+  animation: cardAppear 1s 0.2s ease both;
 }
 
 .envelopeCard {
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.9);
-  border-radius: 24px;
-  padding: 3.5rem 2.5rem;
-  box-shadow: var(--sh-lg);
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: 28px;
+  padding: 3rem 2.5rem 2.5rem;
+  box-shadow:
+    0 24px 80px rgba(45,70,47,0.25),
+    0 0 0 1px rgba(255,255,255,0.1) inset,
+    0 2px 0 rgba(255,255,255,0.3) inset;
   position: relative;
   overflow: hidden;
 }
-.envelopeCard::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: 15%; right: 15%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--sage-light), transparent);
+
+/* Gold accent lines */
+.envelopeGoldLine {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C5982A, #D4AF37, #C5982A, transparent);
+  margin: 0 auto 2rem;
+  opacity: 0.8;
+}
+.envelopeGoldLineBottom {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C5982A, #D4AF37, #C5982A, transparent);
+  margin: 1.5rem auto 0;
+  opacity: 0.8;
 }
 
-.envelopeLeafTop {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: block;
-  animation: leafFloat 3s ease-in-out infinite;
-}
 .envelopeTo {
-  font-size: 0.7rem;
-  letter-spacing: 5px;
+  font-size: 0.65rem;
+  letter-spacing: 6px;
   text-transform: uppercase;
-  color: var(--sage);
+  color: rgba(255,255,255,0.8);
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 .envelopeGuest {
   font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  color: var(--charcoal);
-  margin-bottom: 2rem;
-  line-height: 1.4;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  color: #fff;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
   font-style: italic;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
 .envelopeDivider {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
-  color: var(--sage-light);
+  margin-bottom: 1.5rem;
 }
 .envelopeDivider::before, .envelopeDivider::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--sage-light));
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5));
 }
 .envelopeDivider::after { transform: scaleX(-1); }
+.envelopeDiamondIcon {
+  color: #D4AF37;
+  font-size: 0.5rem;
+  opacity: 0.8;
+}
+
+.envelopeSubtitle {
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
 
 .envelopeNames {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  color: var(--sage-dark);
+  font-size: clamp(3rem, 10vw, 4.5rem);
+  color: #fff;
   line-height: 1;
-  margin-bottom: 0.75rem;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(45,70,47,0.2);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.envelopeAmpersand {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: #D4AF37;
+  margin: 0.2rem 0;
+  font-style: italic;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.envelopeDateWrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.envelopeDateLine {
+  width: 40px;
+  height: 1px;
+  background: rgba(212,175,55,0.4);
 }
 .envelopeDate {
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-  color: var(--rose);
-  margin-bottom: 2.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
 }
+
+/* Mini countdown on cover */
+.envelopeCountdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 0.8rem 1.2rem;
+}
+.envCdItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 52px;
+}
+.envCdNum {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
+}
+.envCdLabel {
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 2px;
+}
+.envCdSep {
+  color: rgba(255,255,255,0.2);
+  font-size: 1.2rem;
+  margin: 0 0.3rem;
+  line-height: 1;
+}
+
 .envelopeBtn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--sage-dark);
+  background: linear-gradient(135deg, #D4AF37 0%, #C5982A 100%);
   color: white;
   padding: 14px 36px;
   border-radius: 50px;
   border: none;
   font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(78,107,80,0.3);
+  box-shadow: 0 8px 28px rgba(197,152,42,0.35);
   transition: all 0.3s;
   position: relative;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 .envelopeBtn::after {
   content: '';
@@ -157,9 +285,9 @@
   z-index: -1;
 }
 .envelopeBtn:hover {
-  background: var(--sage);
+  background: linear-gradient(135deg, #E0C04E 0%, #D4AF37 100%);
   transform: translateY(-3px);
-  box-shadow: 0 14px 32px rgba(78,107,80,0.4);
+  box-shadow: 0 14px 36px rgba(197,152,42,0.45);
 }
 .envBtnAni { animation: bounce 1.5s ease infinite; }
 

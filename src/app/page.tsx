@@ -134,19 +134,77 @@ export default function Home() {
     <>
       {/* ========== ENVELOPE COVER ========== */}
       <div className={`${st.envelopeWrap} ${isOpen ? st.opening : st.closed}`}>
-        <div className={st.envelopeBg} aria-hidden="true">✉</div>
+        {/* Floral decorations */}
+        <div className={st.floralTop} aria-hidden="true">
+          <Image src="/images/floral-top.png" alt="" width={500} height={500} priority />
+        </div>
+        <div className={st.floralBottom} aria-hidden="true">
+          <Image src="/images/floral-bottom.png" alt="" width={500} height={500} priority />
+        </div>
+        {/* Floating gold particles */}
+        <div className={st.goldParticles} aria-hidden="true">
+          {[...Array(12)].map((_, i) => (
+            <span key={i} className={st.goldDot} style={{
+              "--gx": `${10 + Math.random() * 80}%`,
+              "--gy": `${10 + Math.random() * 80}%`,
+              "--gd": `${2 + i * 0.8}s`,
+              "--gs": `${3 + Math.random() * 2}px`,
+            } as React.CSSProperties} />
+          ))}
+        </div>
+
         <div className={st.envelope}>
           <div className={st.envelopeCard}>
-            <span className={st.envelopeLeafTop}>🌿</span>
+            {/* Gold accent line top */}
+            <div className={st.envelopeGoldLine} />
+            
             <p className={st.envelopeTo}>Kepada Yth.</p>
             <p className={st.envelopeGuest}>Bapak / Ibu / Saudara/i<br />Tamu Undangan</p>
-            <div className={st.envelopeDivider}>✦</div>
-            <h1 className={st.envelopeNames}>Andi<br />&<br />Sari</h1>
-            <p className={st.envelopeDate}>20 · 12 · 2026</p>
+            
+            <div className={st.envelopeDivider}>
+              <span className={st.envelopeDiamondIcon}>◆</span>
+            </div>
+
+            <p className={st.envelopeSubtitle}>The Wedding Of</p>
+            <h1 className={st.envelopeNames}>Andi</h1>
+            <p className={st.envelopeAmpersand}>&</p>
+            <h1 className={st.envelopeNames}>Sari</h1>
+
+            <div className={st.envelopeDateWrap}>
+              <span className={st.envelopeDateLine} />
+              <p className={st.envelopeDate}>20 · 12 · 2026</p>
+              <span className={st.envelopeDateLine} />
+            </div>
+
+            {/* Mini countdown */}
+            <div className={st.envelopeCountdown}>
+              <div className={st.envCdItem}>
+                <span className={st.envCdNum}>{String(countdown.d).padStart(2, "0")}</span>
+                <span className={st.envCdLabel}>Hari</span>
+              </div>
+              <span className={st.envCdSep}>|</span>
+              <div className={st.envCdItem}>
+                <span className={st.envCdNum}>{String(countdown.h).padStart(2, "0")}</span>
+                <span className={st.envCdLabel}>Jam</span>
+              </div>
+              <span className={st.envCdSep}>|</span>
+              <div className={st.envCdItem}>
+                <span className={st.envCdNum}>{String(countdown.m).padStart(2, "0")}</span>
+                <span className={st.envCdLabel}>Menit</span>
+              </div>
+              <span className={st.envCdSep}>|</span>
+              <div className={st.envCdItem}>
+                <span className={st.envCdNum}>{String(countdown.s).padStart(2, "0")}</span>
+                <span className={st.envCdLabel}>Detik</span>
+              </div>
+            </div>
+
             <button id="btn-buka-undangan" className={st.envelopeBtn} onClick={handleOpen}>
-              <span className={st.envBtnAni}>✉</span>
+              <span className={st.envBtnAni}>💌</span>
               Buka Undangan
             </button>
+            {/* Gold accent line bottom */}
+            <div className={st.envelopeGoldLineBottom} />
           </div>
         </div>
       </div>
