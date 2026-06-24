@@ -165,20 +165,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Floating Nav */}
-          <nav className={st.floatNav} aria-label="Navigasi Undangan">
-            {NAV_ITEMS.map((item, i) => (
-              <span key={item.id}>
-                {i > 0 && <span className={st.navDot} />}
-                <button
-                  className={`${st.navLink} ${activeSection === item.id ? st.navLinkActive : ""}`}
-                  onClick={() => scrollTo(item.id)}
-                >
-                  {item.label}
-                </button>
-              </span>
-            ))}
-          </nav>
 
           {/* ========== HERO ========== */}
           <section id="hero" className={st.hero} ref={reg("hero")}>
@@ -271,24 +257,25 @@ export default function Home() {
             <span className={st.sectionLabel}>Menuju Hari H</span>
             <h2 className={st.sectionH}>Hitung Mundur</h2>
             <div className={st.cdGrid}>
-              {[
-                { val: countdown.d, lbl: "Hari" },
-                { sep: ":" },
-                { val: countdown.h, lbl: "Jam" },
-                { sep: ":" },
-                { val: countdown.m, lbl: "Menit" },
-                { sep: ":" },
-                { val: countdown.s, lbl: "Detik" },
-              ].map((item, i) =>
-                "sep" in item ? (
-                  <span key={i} className={st.cdSep}>{item.sep}</span>
-                ) : (
-                  <div key={i} className={st.cdItem}>
-                    <span className={st.cdNum}>{String(item.val).padStart(2, "0")}</span>
-                    <span className={st.cdLabel}>{item.lbl}</span>
-                  </div>
-                )
-              )}
+              <div className={st.cdItem}>
+                <span className={st.cdNum}>{String(countdown.d).padStart(2, "0")}</span>
+                <span className={st.cdLabel}>Hari</span>
+              </div>
+              <span className={st.cdSep}>:</span>
+              <div className={st.cdItem}>
+                <span className={st.cdNum}>{String(countdown.h).padStart(2, "0")}</span>
+                <span className={st.cdLabel}>Jam</span>
+              </div>
+              <span className={st.cdSep}>:</span>
+              <div className={st.cdItem}>
+                <span className={st.cdNum}>{String(countdown.m).padStart(2, "0")}</span>
+                <span className={st.cdLabel}>Menit</span>
+              </div>
+              <span className={st.cdSep}>:</span>
+              <div className={st.cdItem}>
+                <span className={st.cdNum}>{String(countdown.s).padStart(2, "0")}</span>
+                <span className={st.cdLabel}>Detik</span>
+              </div>
             </div>
           </section>
 
@@ -530,7 +517,7 @@ export default function Home() {
               Kehadiran dan doa restu Anda adalah anugerah terbesar bagi kami.
               Semoga kebahagiaan senantiasa menyertai Anda sekeluarga.
             </p>
-            <p className={st.footerCredit}>Created with ♥ for Hunters</p>
+            <p className={st.footerCredit}>Hunters</p>
             <span className={st.footerLeaf}>🌿</span>
           </footer>
         </main>

@@ -563,43 +563,46 @@
 .cdGrid {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
 }
 .cdItem {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px;
-  padding: 1.75rem 1.25rem;
-  min-width: 100px;
+  border-radius: 16px;
+  padding: 1rem 0.75rem;
+  min-width: 72px;
+  width: clamp(72px, 18vw, 110px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   transition: background 0.3s;
+  flex-shrink: 0;
 }
-.cdItem:hover { background: rgba(255,255,255,0.15); }
+.cdItem:hover { background: rgba(255,255,255,0.18); }
 .cdNum {
   font-family: var(--font-heading);
-  font-size: 3.5rem;
+  font-size: clamp(1.8rem, 7vw, 3rem);
   font-weight: 600;
   color: white;
   line-height: 1;
-  min-width: 3ch;
   text-align: center;
 }
 .cdLabel {
-  font-size: 0.7rem;
-  letter-spacing: 3px;
+  font-size: clamp(0.55rem, 1.5vw, 0.7rem);
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--sage-light);
 }
 .cdSep {
   font-family: var(--font-heading);
-  font-size: 3rem;
-  color: rgba(255,255,255,0.2);
-  align-self: flex-start;
-  margin-top: 1.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  color: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+  line-height: 1;
+  margin-bottom: 1rem;
 }
 
 /* ===== STORY – ZIGZAG ===== */
